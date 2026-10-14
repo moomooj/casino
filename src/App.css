@@ -1,0 +1,365 @@
+/* 레이아웃 및 기본 뼈대 */
+.stage {
+  width: 100%;
+  height: 100%;
+  background: #3a3f4d;
+  padding: 16px;
+  display: flex;
+  align-items: stretch;
+  gap: 24px;
+}
+
+/* =========================================
+   왼쪽 패널 (최근 스핀 기록)
+   ========================================= */
+.left-panel {
+  width: 120px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.left-panel__cell {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-family: "Source Sans 3", system-ui, sans-serif;
+  font-size: 5.2svh;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.left-panel__cell--red {
+  background: #c62828;
+}
+
+.left-panel__cell--black {
+  background: #1a1a1a;
+}
+
+.left-panel__cell--green {
+  background: #7cb342;
+}
+
+/* 입력된 숫자가 없을 때 빈 칸 스타일 */
+.left-panel__cell--empty {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* =========================================
+   메인 패널 (통계 및 룰렛 휠)
+   ========================================= */
+.main-panel {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative; /* 입력 폼 고정을 위해 추가 */
+}
+
+/* 상단 카테고리 (BLACK, RED, ODD, EVEN) */
+.category-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.category-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 96px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+  font-family: "Source Sans 3", system-ui, sans-serif;
+}
+
+.category-box__percent {
+  font-size: 1.9rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.category-box__label {
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.category-box--black {
+  background: #1a1a1a;
+}
+
+.category-box--red {
+  background: #c62828;
+}
+
+.category-box--odd,
+.category-box--even {
+  background: #525868;
+}
+
+/* =========================================
+   HOT & COLD 통계 그룹
+   ========================================= */
+.stats-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.sub-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* HOT, COLD 라벨 */
+.sub-row__title {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  margin-right: 4px;
+}
+
+.sub-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 108px;
+  height: 72px;
+  background: #2a2e38;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-family: "Source Sans 3", system-ui, sans-serif;
+}
+
+.sub-box__number {
+  font-size: 2.4rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.sub-box__count {
+  font-size: 1rem;
+  font-weight: 600;
+  opacity: 0.9;
+  line-height: 1;
+}
+
+/* HOT 숫자는 붉은 톤 */
+.sub-box--hot .sub-box__number {
+  color: #f3e11c;
+}
+
+/* COLD 숫자는 푸른 톤 */
+.sub-box--cold .sub-box__number {
+  color: #448aff;
+}
+
+/* =========================================
+   룰렛 휠 UI
+   ========================================= */
+.wheel-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.wheel {
+  position: relative;
+  width: min(58svh, 100%);
+  aspect-ratio: 1;
+}
+
+.wheel__ring {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.wheel__pocket--red {
+  fill: #c62828;
+}
+
+.wheel__pocket--black {
+  fill: #1a1a1a;
+}
+
+.wheel__pocket--green {
+  fill: #7cb342;
+}
+
+.wheel__pocket {
+  stroke: rgba(255, 255, 255, 0.12);
+  stroke-width: 0.35;
+}
+
+.wheel__label {
+  fill: #ffffff;
+  font-family: "Source Sans 3", system-ui, sans-serif;
+  font-size: 7.2px;
+  font-weight: 800;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  pointer-events: none;
+}
+
+.wheel__center-fill {
+  fill: #3a3f4d;
+  stroke: rgba(255, 255, 255, 0.12);
+  stroke-width: 0.6;
+}
+
+.wheel__bar {
+  fill: rgba(232, 201, 106, 0.85);
+}
+
+/* =========================================
+   우측 하단 번호 입력 폼
+   ========================================= */
+.input-form {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  gap: 8px;
+  background: rgba(42, 46, 56, 0.95);
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.input-field {
+  width: 150px;
+  height: 40px;
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  border-radius: 4px;
+  padding: 0 12px;
+  font-family: "Source Sans 3", system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  outline: none;
+}
+
+.input-field:focus {
+  border-color: #e8c96a;
+}
+
+.btn {
+  height: 40px;
+  padding: 0 16px;
+  border: none;
+  border-radius: 4px;
+  font-family: "Source Sans 3", system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn--submit {
+  background: #e8c96a;
+  color: #1a1a1a;
+}
+
+.btn--submit:hover {
+  background: #d4b553;
+}
+
+.btn--reset {
+  background: #c62828;
+  color: #fff;
+}
+
+.btn--reset:hover {
+  background: #a81c1c;
+}
+
+/* =========================================
+   🔥 연속 출현 (Streak) 경보 스타일
+   ========================================= */
+.streak-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  animation: slideDown 0.3s ease-out forwards;
+}
+
+.streak-banner {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+  font-family: "Source Sans 3", system-ui, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  /* 심장박동 애니메이션 무한 반복 */
+  animation: pulse 1s infinite alternate;
+}
+
+/* 색상별 알림창 배경색 설정 */
+.streak-banner--red {
+  background: linear-gradient(135deg, #c62828 0%, #ff5252 100%);
+}
+.streak-banner--black {
+  background: linear-gradient(135deg, #1a1a1a 0%, #424242 100%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.streak-banner--green {
+  background: linear-gradient(135deg, #558b2f 0%, #7cb342 100%);
+}
+.streak-banner--odd,
+.streak-banner--even {
+  background: linear-gradient(135deg, #f57f17 0%, #fbc02d 100%);
+  color: #1a1a1a;
+  text-shadow: none;
+}
+
+/* 애니메이션 키프레임 */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+  100% {
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
